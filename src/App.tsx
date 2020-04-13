@@ -3,8 +3,10 @@ import { Fragment } from 'react';
 import './App.css';
 import { IUserLogin } from './components/personLogin';
 import { IMenuItem } from './components/menuItem';
+import LogInOutButton from './components/LogInOutButton';
 
 
+ 
 export interface IAppProps {
 }
 
@@ -49,14 +51,41 @@ export default class App extends React.Component<IAppProps, IState> {
         [{key:'1',name:'Home'},{key:'2',name:"Page-Charlie"},{key:'3',name:'intro in c#'},{key:'4',name:"React Begginers"}]
       ]
     }
-
   }
+
+  public onClickLogInButton = () => {
+    // Test for any modal forms open to prevent button operation.
+    if ( !(this.state.loginFormIsOpen || this.state.showingFailedLogin) ) {
+      this.setState( { loginFormIsOpen: true} );
+    }
+  }
+  
+  public onClickLogOutButton = () => {
+    this.setState(
+      { 
+        loggedIn: false,
+        userNum: 0
+      }
+    );
+  }
+
 
   
   public render(){
+    let { loginFormIsOpen, loggedIn, userNum, showingFailedLogin, menuItems } = this.state;
+    let userMenuItems: IMenuItem[];
+    if ( userNum >= 0 ) {
+      userMenuItems = menuItems[userNum];
+    } else {
+      userMenuItems = [{key:'1',name:'Home'}];
+    }
     return(
       <Fragment>
-        
+        <LogInOutButton
+          loggedIn={loggedIn}
+          callbackLogIn={this.onClickLogInButton}
+          callbackLogOut={this.onClickLogOutButton} />
+
       </Fragment>
     )
   }

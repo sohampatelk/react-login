@@ -1,9 +1,9 @@
 import React from 'react';
 import { Fragment } from 'react';
 import './App.css';
-import { IUserLogin } from './components/personLogin';
-import { IMenuItem } from './components/menuItem';
-import LogInOutButton from './components/LogInOutButton';
+import { IUserLogin } from '../model/personLogin';
+import { IMenuItem } from '../model/menuItem';
+import LogInOutButton from './LogInOutButton';
 
 
  
@@ -27,16 +27,16 @@ export default class App extends React.Component<IAppProps, IState> {
     this.state = {
       userLogins: [
         {
-          username: 'user1',
-          password: 'password1'
+          username: 'soham',
+          password: 'soham'
         },
         {
-          username: 'user2',
-          password: 'password2'
+          username: 'john',
+          password: 'john'
         },
         {
-          username: 'user3',
-          password: 'password3'
+          username: 'charlie',
+          password: 'charlie'
         }
       ],
       //this state login pform page is open or not.

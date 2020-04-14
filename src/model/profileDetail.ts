@@ -1,7 +1,6 @@
 export interface IProfileDetail {
     username: string;
     name: string;
-    favouriteLanguage: string;
-    favouriteFramework: string;
+    email: string;
     hobby: string
   }

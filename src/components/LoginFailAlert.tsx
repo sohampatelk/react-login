@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Fragment } from 'react';
 import { Button } from 'semantic-ui-react';
 
@@ -14,7 +14,7 @@ export default class LoginFailAlert extends React.Component<ILoginFailAlert> {
         if ( showFailedLogin ) {
             return(
             <Fragment>
-                <h1> Username or Password did not match. Please try again.</h1>
+                {alert("Username or Password did not match. Please try again.")}
                 <Button content='OK' onClick={() => onClickOk()} />
             </Fragment>
             );

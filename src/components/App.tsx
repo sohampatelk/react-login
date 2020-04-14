@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Fragment } from 'react';
 import '../style/App.css';
 import { IPersonLogin } from '../model/personLogin';
@@ -87,7 +87,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
     let { userLoginDetails } = this.state;
     console.log(this.state);
     let foundMatch = -1;
-    for (let i = 0; i < userLoginDetails.length; i++) {
+    for (var i = 0; i < userLoginDetails.length; i++) {
       if (currentUserInput === userLoginDetails[i].username && currentPasswordInput === userLoginDetails[i].password) {
         foundMatch = i;
         console.log(`User found match done means it will get index of array ${i}`);

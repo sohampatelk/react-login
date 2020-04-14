@@ -22,27 +22,23 @@ export default class ProfileDetail extends React.Component<IProfileDetailProps, 
                 {
                     username: 'soham',
                     name: 'soham',
-                    favouriteLanguage: 'Html/Css',
-                    favouriteFramework: 'Bootstrap',
+                    email: 'soham@yahoo.com',
                     hobby: 'Swimming'
                 },
                 {
                     username: 'john',
                     name: 'john',
-                    favouriteLanguage: 'C#',
-                    favouriteFramework: '.NET',
+                    email: 'john@yahoo.com',
                     hobby: 'Running'
                 },
                 {
                     username: 'smith',
                     name: 'smith',
-                    favouriteLanguage: 'Java',
-                    favouriteFramework: 'InteliJ',
+                    email: 'smith@gmail.com',
                     hobby: 'Ice-skatting'
                 }
             ]
         }
-
     }
 
     public render() {
@@ -52,14 +48,12 @@ export default class ProfileDetail extends React.Component<IProfileDetailProps, 
         console.log(this.state);
 
         if (loggedIn) {
-            const { username, name, favouriteLanguage, favouriteFramework, hobby } = userProfileDetail[userNum];
+            const { username, name, email, hobby } = userProfileDetail[userNum];
             return (
                 <Fragment>
-                    <p></p>
                     <p>Username: {username}</p>
                     <p>Name: {name}</p>
-                    <p>Favourite Language: {favouriteLanguage}</p>
-                    <p>Favourite Framework: {favouriteFramework}</p>
+                    <p>Email: {email}</p>
                     <p>Hobby: {hobby}</p>
                 </Fragment>
             );

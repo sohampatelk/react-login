@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Fragment } from 'react';
 import LoginPage from './LoginPage';
 
@@ -12,7 +12,8 @@ export default class Login extends React.Component<ILogin> {
         return(
         <Fragment>
             {loginFormIsOpen ?
-                <div><LoginPage onClickSubmit={onClickSubmit} /></div>:<div></div>
+                <div><LoginPage onClickSubmit={onClickSubmit} /></div>:
+                <h2>Something is wrong.</h2>
             }
         </Fragment>
         )

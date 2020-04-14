@@ -48,6 +48,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
   }
 
   public onClickLogInButton = () => {
+    console.log("Log in button clicked");
     // Test for any modal forms open to prevent button operation.
     if (!(this.state.loginFormIsOpen || this.state.showFailedLogin)) {
       this.setState({ loginFormIsOpen: true });
@@ -55,6 +56,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
   }
 
   public onClickLogOutButton = () => {
+    console.log("Log Out button clicked...");
     this.setState(
       {
         loggedIn: false,
@@ -66,6 +68,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
 
   // Click Submit button from Login Page 
   public onClickSubmit = (currentUserInput: string, currentPasswordInput: string) => {
+    console.log("Submit button clicked in form...");
     this.setState({ loginFormIsOpen: false });
     let foundUser = this.isUserValid(currentUserInput, currentPasswordInput);
     if (foundUser >= 0) {
@@ -80,11 +83,14 @@ export default class App extends React.Component<IAppProps, IAppState> {
 
   //If user is found then return found match array index is 0 or positive otherwise foundmatch will be -1.
   isUserValid = (currentUserInput: string, currentPasswordInput: string): number => {
+    console.log("in uservalid function");
     let { userLoginDetails } = this.state;
+    console.log(this.state);
     let foundMatch = -1;
     for (let i = 0; i < userLoginDetails.length; i++) {
       if (currentUserInput === userLoginDetails[i].username && currentPasswordInput === userLoginDetails[i].password) {
         foundMatch = i;
+        console.log(`User found match done means it will get index of array ${i}`);
       }
     }
     return foundMatch;
@@ -97,6 +103,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
 
 
   public render() {
+    console.log(this.state);
     let { loginFormIsOpen, loggedIn, userNum, showFailedLogin } = this.state;
 
     return (

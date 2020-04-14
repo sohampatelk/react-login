@@ -48,6 +48,9 @@ export default class ProfileDetail extends React.Component<IProfileDetailProps, 
     public render() {
         const { userProfileDetail } = this.state;
         const { userNum, loggedIn } = this.props;
+        console.log(this.props);  //for reference
+        console.log(this.state);
+
         if (loggedIn) {
             const { username, name, favouriteLanguage, favouriteFramework, hobby } = userProfileDetail[userNum];
             return (

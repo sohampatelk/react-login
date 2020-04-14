@@ -11,8 +11,8 @@ export default class LoginFailAlert extends React.Component<ILoginFailAlert> {
 
     public render () {
         const { showFailedLogin, onClickOk } = this.props;
-        console.log("We are in login fail alert page :"+this.props); //for reference
-        console.log("The value of showFailedLogin :"+showFailedLogin); //for reference
+        console.log(`We are in login fail alert page :${this.props}`); //for reference
+        console.log(`The value of showFailedLogin :${showFailedLogin}`); //for reference
         if ( showFailedLogin ) {
             return(
             <Fragment>

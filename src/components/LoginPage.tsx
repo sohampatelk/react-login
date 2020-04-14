@@ -25,13 +25,14 @@ export default class LoginPage extends React.Component<ILoginPageProps, ILoginPa
     }
 
     onPasswordFieldChange = (event: React.FormEvent<HTMLInputElement>) => {
-        let passwordInput = event.currentTarget.value;
-        let newPassword = this.state.currentPassword;
+        this.setState({currentPassword:event.currentTarget.value})
     }
 
     public render() {
         const { onClickSubmit } = this.props;
         const { currentUser, currentPassword } = this.state;
+        console.log("We are in login page: "+ this.state);
+        
         return (
             <Fragment>
                 <h1>Log-In</h1>

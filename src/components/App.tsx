@@ -103,8 +103,8 @@ export default class App extends React.Component<IAppProps, IAppState> {
 
 
   public render() {
-    console.log(this.state);
     let { loginFormIsOpen, loggedIn, userNum, showFailedLogin } = this.state;
+    console.log(this.state);  //for reference
 
     return (
       <Fragment>

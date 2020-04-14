@@ -1,5 +1,5 @@
   
-export interface IUserLogin {
+export interface IPersonLogin {
     username: string;
     password: string;
 }

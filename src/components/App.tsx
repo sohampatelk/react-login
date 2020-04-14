@@ -1,31 +1,32 @@
 import React from 'react';
 import { Fragment } from 'react';
-import './App.css';
-import { IUserLogin } from '../model/personLogin';
-import { IMenuItem } from '../model/menuItem';
+import '../style/App.css';
+import { IPersonLogin } from '../model/personLogin';
 import LogInOutButton from './LogInOutButton';
+import Login from "./Login";
+import LoginFailAlert from './LoginFailAlert';
+import ProfileDetail from './ProfileDetail';
 
 
- 
+
 export interface IAppProps {
 }
 
 export interface IState {
-  userLogins: IUserLogin[];
+  userLoginDetails: IPersonLogin[];   //User detail which contain username and passwords
   loginFormIsOpen: boolean;
   loggedIn: boolean;
   userNum: number;
-  showingFailedLogin: boolean;
-  menuItems: IMenuItem[][];
+  showFailedLogin: boolean;
 }
 
 export default class App extends React.Component<IAppProps, IState> {
   constructor(props: IAppProps) {
     super(props);
-    
+
     //Set up properties for user
     this.state = {
-      userLogins: [
+      userLoginDetails: [
         {
           username: 'soham',
           password: 'soham'
@@ -35,8 +36,8 @@ export default class App extends React.Component<IAppProps, IState> {
           password: 'john'
         },
         {
-          username: 'charlie',
-          password: 'charlie'
+          username: 'smith',
+          password: 'smith'
         }
       ],
       //this state login pform page is open or not.
@@ -44,25 +45,21 @@ export default class App extends React.Component<IAppProps, IState> {
       loggedIn: false,
       // user number is 0 when none is logged in ,
       userNum: 0,
-      showingFailedLogin: false,
-      menuItems: [
-        [{key:'1',name:'Home'},{key:'2',name:"Page-Soham"},{key:'3',name:'Introduction to HTML'},{key:'4',name:"CSS for Beginners"}],
-        [{key:'1',name:'Home'},{key:'2',name:"Page-John"},{key:'3',name:'Javascript - advanced'},{key:'4',name:"Expert in TypeScript"}],
-        [{key:'1',name:'Home'},{key:'2',name:"Page-Charlie"},{key:'3',name:'intro in c#'},{key:'4',name:"React Begginers"}]
-      ]
+      showFailedLogin: false,
+
     }
   }
 
   public onClickLogInButton = () => {
     // Test for any modal forms open to prevent button operation.
-    if ( !(this.state.loginFormIsOpen || this.state.showingFailedLogin) ) {
-      this.setState( { loginFormIsOpen: true} );
+    if (!(this.state.loginFormIsOpen || this.state.showFailedLogin)) {
+      this.setState({ loginFormIsOpen: true });
     }
   }
-  
+
   public onClickLogOutButton = () => {
     this.setState(
-      { 
+      {
         loggedIn: false,
         userNum: 0
       }
@@ -70,24 +67,60 @@ export default class App extends React.Component<IAppProps, IState> {
   }
 
 
-  
-  public render(){
-    let { loginFormIsOpen, loggedIn, userNum, showingFailedLogin, menuItems } = this.state;
-    let userMenuItems: IMenuItem[];
-    if ( userNum >= 0 ) {
-      userMenuItems = menuItems[userNum];
+  // Click Submit button from Login Page 
+  public onClickSubmit = (currentUserInput: string, currentPasswordInput: string) => {
+    this.setState({ loginFormIsOpen: false });
+    let foundUser = this.isUserValid(currentUserInput, currentPasswordInput);
+    if (foundUser >= 0) {
+      this.setState({
+        loggedIn: true,
+        userNum: foundUser
+      })
     } else {
-      userMenuItems = [{key:'1',name:'Home'}];
+      this.setState({ showFailedLogin: true });
     }
-    return(
+  }
+
+  //If user is found then return found match array index is 0 or positive otherwise foundmatch will be -1.
+  isUserValid = (currentUserInput: string, currentPasswordInput: string): number => {
+    let { userLoginDetails } = this.state;
+    let foundMatch = -1;
+    for (let i = 0; i < userLoginDetails.length; i++) {
+      if (currentUserInput === userLoginDetails[i].username && currentPasswordInput === userLoginDetails[i].password) {
+        foundMatch = i;
+      }
+    }
+    return foundMatch;
+  }
+
+  // If Login is fail then set the showFailedLogin to false
+  public onClickOk = () => {
+    this.setState({ showFailedLogin: false });
+  }
+
+
+  public render() {
+    let { loginFormIsOpen, loggedIn, userNum, showFailedLogin } = this.state;
+
+    return (
       <Fragment>
         <LogInOutButton
           loggedIn={loggedIn}
           callbackLogIn={this.onClickLogInButton}
           callbackLogOut={this.onClickLogOutButton} />
 
+        <Login
+          loginFormIsOpen={loginFormIsOpen}
+          onClickSubmit={this.onClickSubmit} />
+
+        <LoginFailAlert
+          showFailedLogin={showFailedLogin}
+          onClickOk={this.onClickOk} />
+
+        <ProfileDetail
+          userNum={userNum}
+          loggedIn={loggedIn} />
       </Fragment>
     )
   }
-
 }

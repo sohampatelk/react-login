@@ -7,12 +7,9 @@ import Login from "./Login";
 import LoginFailAlert from './LoginFailAlert';
 import ProfileDetail from './ProfileDetail';
 
-
-
 export interface IAppProps {
 }
-
-export interface IState {
+export interface IAppState {
   userLoginDetails: IPersonLogin[];   //User detail which contain username and passwords
   loginFormIsOpen: boolean;
   loggedIn: boolean;
@@ -20,7 +17,7 @@ export interface IState {
   showFailedLogin: boolean;
 }
 
-export default class App extends React.Component<IAppProps, IState> {
+export default class App extends React.Component<IAppProps, IAppState> {
   constructor(props: IAppProps) {
     super(props);
 
